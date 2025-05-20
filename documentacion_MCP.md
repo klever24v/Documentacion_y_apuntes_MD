@@ -1,106 +1,112 @@
+# 🧠 Guía Completa para Crear un Servidor MCP para Modelos LLM
 
-🧠 ¿Qué es MCP?
-El Model Context Protocol (MCP) es un estándar abierto desarrollado por Anthropic que permite a los modelos de lenguaje grande (LLMs) interactuar de manera segura y estandarizada con herramientas externas, APIs y fuentes de datos. MCP actúa como una capa de traducción entre los LLMs y las aplicaciones, facilitando la integración sin necesidad de desarrollos personalizados para cada herramienta .
+## ¿Qué es MCP?
 
-🧰 Herramientas y Recursos para Desarrollar un Servidor MCP
-1. Lenguajes y Entornos de Desarrollo
-Node.js: Ideal para desarrollos rápidos y una amplia comunidad de soporte.
+MCP (Model Context Protocol) es un protocolo abierto que permite a los modelos de lenguaje (LLMs) interactuar con herramientas externas, APIs, funciones o sistemas de forma estructurada y controlada. Fue propuesto por Anthropic como una forma de ampliar las capacidades de los LLMs más allá del texto.
 
-Python: Ofrece bibliotecas como FastAPI y LangChain para integraciones más complejas.
+---
 
-2. Bibliotecas y Frameworks
-@cherry-ai/sdk: Cliente LLM compatible con MCP, facilita la comunicación con modelos como OpenAI o Claude.
+## 🛠️ Herramientas Recomendadas
 
-LangChain: Framework para construir aplicaciones LLM con soporte para MCP.
+### Lenguajes y Frameworks
 
-FastAPI: Framework web en Python que permite crear APIs rápidamente, útil para exponer las herramientas MCP.
+| Lenguaje | Framework Recomendado  | Comentario                         |
+| -------- | ---------------------- | ---------------------------------- |
+| Node.js  | Express.js, Cherry SDK | Rápido, compatible con Cherry      |
+| Python   | FastAPI, LangChain     | Ideal para integraciones complejas |
 
-3. Herramientas de Autenticación y Seguridad
-OAuth 2.0: Protocolo de autorización estándar para permitir el acceso seguro a recursos protegidos.
+### Librerías Esenciales
 
-Tokens API: Claves de acceso que permiten a las aplicaciones autenticarse y acceder a APIs externas.
+* [`@cherry-ai/sdk`](https://github.com/CherryHQ/cherry-studio): Cliente MCP para interactuar con modelos LLM (OpenAI, Claude, Mistral, etc).
+* [`LangChain`](https://github.com/hwchase17/langchain): Framework para crear flujos con LLMs.
+* [`FastAPI`](https://fastapi.tiangolo.com/): Framework web en Python para crear APIs rápidamente.
 
-🛠️ Pasos para Crear un Servidor MCP
-1. Definir las Herramientas MCP
-Cada herramienta MCP es una función que el LLM puede invocar. Estas funciones deben estar decoradas o anotadas para ser reconocidas por el servidor MCP.
+---
 
-Ejemplo en Python con FastAPI:
+## 💪 Pasos para Crear un Servidor MCP
 
-python
-Copiar
-Editar
-from fastapi import FastAPI
+### 1. Definir Herramientas (Tools)
+
+Una herramienta es una función que el modelo puede invocar. Se define de forma clara, con sus parámetros bien tipados.
+
+**Ejemplo en Python:**
+
+```python
 from mcp import tool
-
-app = FastAPI()
 
 @tool()
 def obtener_usuario(id: int):
-    # Lógica para obtener un usuario
-    return {"id": id, "nombre": "Juan Pérez"}
-2. Configurar el Servidor MCP
-El servidor MCP actúa como intermediario entre el LLM y las herramientas definidas. Debe exponer las herramientas y manejar las solicitudes del LLM.
+    return {"id": id, "nombre": "Juan"}
+```
 
-Ejemplo básico en Python:
+### 2. Registrar las Herramientas en un Servidor
 
-python
-Copiar
-Editar
+```python
 from fastapi import FastAPI
 from mcp import MCPServer
 
 app = FastAPI()
 server = MCPServer(app)
-
-# Registrar herramientas
 server.register_tool(obtener_usuario)
-3. Integrar con un LLM Cliente
-Utiliza un cliente LLM compatible con MCP, como @cherry-ai/sdk, para enviar solicitudes al servidor MCP.
+```
 
-Ejemplo en JavaScript:
+### 3. Conectar un Cliente LLM
 
-javascript
-Copiar
-Editar
+**Ejemplo en Node.js con Cherry:**
+
+```js
 const { Cherry } = require('@cherry-ai/sdk');
-
 const cherry = new Cherry({
   provider: 'openai',
   apiKey: process.env.OPENAI_API_KEY
 });
 
-const response = await cherry.chat({
+const result = await cherry.chat({
   messages: [
-    {
-      role: 'user',
-      content: 'Obtener información del usuario con ID 123'
-    }
+    { role: 'user', content: 'Dime los datos del usuario con ID 1' }
   ],
   tools: [
     {
       type: 'function',
       function: {
         name: 'obtener_usuario',
-        parameters: { id: 123 }
+        parameters: { id: 1 }
       }
     }
   ]
 });
-🔒 Consideraciones de Seguridad
-Validación de Entradas: Asegúrate de validar y sanitizar todas las entradas para evitar inyecciones de código o datos maliciosos.
+```
 
-Autenticación y Autorización: Implementa mecanismos de autenticación (como OAuth 2.0) y verifica que los usuarios tengan permisos adecuados para acceder a los recursos.
+---
 
-Registro y Monitoreo: Mantén registros de las solicitudes y respuestas para auditar y detectar comportamientos anómalos.
+## 🔒 Seguridad
 
-Límites de Uso: Establece límites de tasa y cuotas para prevenir abusos del sistema.
+* ✅ Validación de entradas con Zod, Pydantic o Joi
+* ✅ Autenticación con OAuth2 o tokens Bearer
+* ✅ Registros de uso y límites de acceso (rate limiting)
+* ✅ Sanitización de respuestas para evitar fugas de datos
 
-📚 Recursos Adicionales
-Guía de Anthropic sobre MCP
+---
 
-Documentación de Cherry SDK
+## 🧪 Buenas Prácticas
 
-Tutorial de FastAPI
+* Define contratos claros en las herramientas (tipado y documentación)
+* Separa lógica de negocio del manejo LLM
+* Usa pruebas automatizadas para validar que las herramientas respondan correctamente
+* Implementa métricas y trazabilidad (observabilidad)
 
-Repositorio de LangChain
+---
 
+## 📚 Recursos
+
+* [Cherry Studio GitHub](https://github.com/CherryHQ/cherry-studio)
+* [Guía oficial de Anthropic MCP](https://support.anthropic.com)
+* [FastAPI](https://fastapi.tiangolo.com/)
+* [LangChain](https://python.langchain.com/)
+* [OpenAI Tools API](https://platform.openai.com/docs/guides/function-calling)
+
+---
+
+## ✅ Ejemplo de Proyecto Completo
+
+¿Quieres un proyecto con Express + Cherry + Herramientas MCP preconfiguradas? Pídelo y te lo genero listo para usar.
