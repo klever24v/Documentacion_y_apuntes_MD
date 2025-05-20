@@ -1,0 +1,12 @@
+- conseguir la ruta de un fichero o directorio ``realpath <nombre fichero>``
+- Edición de ficheros ``nano``
+- para ver un fichero ``cat``
+- cuando creamos un agente en el directorio de ``llm-funtions`` usamos ``argc build``
+-
+- Comandos git como trbajamos en un resositorio linux tenemos que añadir la ruta a la lista de s
+- debes **agregar el directorio actual a la lista de directorios seguros en Git**. Esto se puede hacer con el siguiente comando:
+- ```bash
+          - CopiarEditar
+          - git config --global --add safe.directory '//wsl.localhost/Ubuntu-20.04/home/klever/llm-functions/agents/contador-de-f
+  ```
+-

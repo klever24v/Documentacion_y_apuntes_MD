@@ -1,0 +1,180 @@
+
+
+- # Guía de Tecnologías y Herramientas Mencionadas
+	- ---
+	- ## 📦 1. AIChat y LLM Functions (Core IA)
+		- ### 🔹 AIChat
+			- CLI para interactuar con LLMs como si fueran "agentes inteligentes".
+			- Usa configuraciones en YAML para definir roles, herramientas (`tools`) y funciones.
+			- Puedes usar `tools.yaml` para centralizar herramientas comunes a varios agentes.
+			- Directorio: `~/.config/aichat/`
+				- `config.yaml` ➔ Config global (modelo, clave API, tools_file, etc.)
+				- `functions/` ➔ Contiene scripts ejecutables (agentes, macros, utilidades).
+				- `roles/` ➔ Archivos `.yaml` con prompts de sistema por rol.
+				- `agents.txt` ➔ Lista de agentes predefinidos y sus funciones.
+			- #### Ejemplo de rol `.yaml`
+				- ```
+				      name: traductor_es_en
+				      prompt: >
+				      Eres un traductor profesional de español a inglés. Traduce fielmente el texto.
+				      variables:
+				      - input
+				    ```
+		- ### 🔹 llm-functions
+			- Repositorio con funciones listas para usar desde AIChat.
+			- Cada función puede:
+				- Tomar una entrada de usuario
+				- Llamar a un LLM
+				- Ejecutar comandos, devolver resultados estructurados.
+				- Repositorio: [https://github.com/sigoden/llm-functions](https://github.com/sigoden/llm-functions)
+			- ---
+	- ## 🧰 2. Herramientas Técnicas y DevOps
+		- ### 🐳 Docker
+			- Sistema de contenedores. Aísla el software para evitar conflictos.
+			- Usa `Dockerfile` para crear imágenes personalizadas.
+			- Los `volumes` permiten guardar datos incluso si el contenedor se reinicia.
+				- ```
+				      docker run -v /misdatos:/app/data imagen:tag
+				    ```
+		- ### ☘️ Kubernetes
+			- Orquestador de contenedores.
+			- Replica, escala y balancea cargas.
+			- Detecta fallos y reinicia servicios.
+		- ### 🔥 Balanceador de carga
+			- Herramientas como **Nginx** o **Traefik** distribuyen peticiones HTTP.
+			- Mejora rendimiento y disponibilidad.
+		- ### ⚙️ Otros conceptos DevOps
+			- VPS: servidores privados virtuales para montar entornos personalizados.
+			- Docker + Kubernetes + balanceo: escalabilidad y alta disponibilidad.
+			- Seguridad: evitar exponer puertos innecesarios, revisar persistencia de volúmenes.
+			- ---
+	- ## 🧪 3. Despliegue y Backend Inteligente
+		- ### 🌐 Vercel / Heroku
+			- Plataformas para desplegar apps rápidamente.
+			- Autodespliegue desde GitHub con CI/CD.
+		- ### 🧠 AI as Backend
+			- Usar IA (via prompt o función) como lógica de backend.
+			- Ejemplo: prompt que valida formularios o responde consultas sin backend tradicional.
+		- ### Deno / Bun.sh / Node.js
+			- Plataformas modernas para ejecutar código JavaScript.
+			- Deno soporta TypeScript de forma nativa y tiene una CLI moderna.
+			- Bun.sh busca rapidez y reemplazo directo de Node.js.
+		- ### Deno Deploy / Cloudflare Workers / Zrok / Ngrok
+			- Plataformas de despliegue sin servidor.
+			- Zrok permite endpoints sin límites de conexión como alternativa a Ngrok.
+			- ---
+	- ## 🔍 4. LLMs y Parámetros de Generación
+		- ### Temperatura
+			- 0.0 = respuestas predecibles (código).
+			- 1.0 = respuestas creativas (idea).
+		- ### Top-p
+			- Selección basada en probabilidad acumulada.
+		- ### Max tokens
+			- Límite de salida generada. Evita cortes inesperados.
+		- ### Ejemplos útiles
+			- **Perplexity.ai** ➔ búsqueda combinada con LLM (necesita API key)
+			- **Cohere Command R+** ➔ alternativa a OpenAI para tareas conversacionales.
+			- ---
+	- ## 🔍 5. RAG: Retrieval Augmented Generation
+		- ### ¿Qué es?
+			- Combina:
+				- **Recuperación**: Buscar documentos relevantes.
+				- **Generación**: LLM responde usando esos documentos.
+		- ### Componentes clave
+			- Base de datos vectorial (PGVector, Chroma).
+			- Algoritmo de similitud.
+			- LLM que interpreta contexto.
+		- ### Repos y herramientas útiles
+			- **RAG Guide AIChat** ➔ usar mismo modelo para embeddings y respuesta.
+			- **Feast** ➔ gestión de features, vector store.
+			- **anythingllm.com** ➔ interfaz para experimentar con RAG.
+			- ---
+	- ## 🧰 6. Análisis de Código y Automatización
+		- ### SonarQube
+			- Escáner de calidad de código.
+			- Integración con IDEs como Visual Studio.
+		- ### TypeORM
+			- ORM para bases SQL en TypeScript.
+		- ### tsgo + source maps
+			- Captura errores y mantiene trazabilidad en TS compilado.
+			- `tsconfig` ayuda a gestionar dependencias y compilación.
+		- ### Playwright
+			- Testing automatizado de interfaces web.
+		- ### Git / GitHub
+			- Control de versiones distribuido.
+			- Pull / push / clone para sincronización.
+			- ---
+	- ## 🗺️ 7. Mapas y Datos Geoespaciales
+		- ### Herramientas clave
+			- **Google Maps API / Leaflet** ➔ mapas interactivos.
+			- **OpenStreetMap / IGN / MyMaps** ➔ capas personalizables.
+			- **WMS** ➔ superposición de datos (riesgo, clima, demografía).
+		- ### Formatos comunes
+			- **KML / KMZ** ➔ rutas y capas geográficas.
+			- **WMS** ➔ servicios web de mapas.
+			- ---
+	- ## 🛠️ 8. Modelos Open Source
+		- | Modelo | Fuente | Notas clave |
+		    | --- | --- | --- |
+		    | LLaMA | Meta | Open source, versátil. |
+		    | Gemma | Google | Basado en Gemini. |
+		    | Phi | Microsoft | Ligero y eficiente. |
+		    | Mistral | Mistral AI | Muy competitivo con GPT. |
+		    | Jan.ai | - | Pruebas de modelos open source. |
+		    | DeepSeek | - | API key: `deepseek_test_apikey` |
+		- ### Técnicas clave
+			- **Distillation** ➔ transferir aprendizaje de un modelo grande a otro pequeño.
+			- **Quantization** ➔ reducir tamaño (ej: Q4, Q5, Q8).
+			- **Fine-tuning** ➔ personalización de modelos para tareas específicas.
+			- ---
+	- ## 🎓 9. Plataformas de Aprendizaje y Prototipado
+		- **Google Colab**: notebooks Python en la nube con GPU.
+		- **NotebookLM**: resúmenes desde documentos y URL.
+		- **AIStudio**: entorno de Google para pruebas con IA.
+		- **Kaggle**: datasets para IA y análisis.
+		- **HuggingFace**: repositorio de modelos, datasets y spaces.
+		- **Gradio**: interfaces gráficas para modelos de IA.
+		- ---
+	- ## ♻️ 10. Fine-Tuning y Especialización
+		- Entrenamiento adicional para tareas específicas.
+		- Requiere:
+			- Datos etiquetados
+			- Varios `epochs`
+			- Ajustes como `learning rate`, `batch size`
+		- ### Herramientas destacadas
+			- **Unsloth** ➔ fine-tuning acelerado.
+			- **HuggingFace** ➔ herramientas y librerías (transformers, datasets, PEFT).
+			- **OpenAI Fine-tuning** ➔ guía: [https://platform.openai.com/docs/guides/fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
+			- ---
+	- ## 🔐 11. Seguridad, Logs y Almacenamiento
+		- **.env / dotenv**: variables de entorno.
+		- **Winston**: logging avanzado en Node.js.
+		- **Logli**: plataforma visual de análisis de logs.
+		- **UUID**: identificadores únicos.
+		- **Cookies**: sesión, persistencia y seguimiento.
+		- Tipos: sesión, persistentes, seguras, HttpOnly.
+		- **LocalStorage / SessionStorage**: almacenamiento clave-valor.
+		- **IndexedDB**: base de datos local NoSQL indexada.
+		- **Librerías IndexedDB**: `idb`, `localForage`, `Dexie.js`, `lovefield`, `jsstore`, `idb-keyval`
+		- **Encriptación**: usar `crypto-js`, `bcryptjs`, `sjcl`, `tweetnacl` con IndexedDB.
+		- ---
+	- ## 🚀 Extras para Automatizar y Probar
+		- **Pixel + Acuse de recibo**: trazabilidad de lectura y notificaciones.
+		- **WebSocket**: comunicación bidireccional cliente-servidor.
+		- **SSE (Server Sent Events)**: solo push server ➔ requiere HTTPS.
+		- **Push Notifications**: suscripción a notificaciones desde servidor.
+		- **Web Bluetooth API**: explorar comunicación vía Bluetooth BLE.
+		- **Bluetooth 3 / 4 / 5**: estándares según energía y modo de conexión.
+		- ---
+	- ## 📚 Otros Recursos y Conceptos
+		- **Langchain / LangGraph / Landchange** ➔ frameworks para agentes LLM.
+		- **WebAssembly** ➔ contenedor binario ejecutable en navegador.
+		- **Deno / Bun.sh / Node.js** ➔ plataformas de ejecución JavaScript modernas.
+		- **V0.dev / tryscript** ➔ frontends para UI generativa.
+		- **CodeIgniter / Rector / PHP 5.3** ➔ modernización de proyectos legacy.
+		- **Fresh (Deno)** ➔ frontend reactivo con recarga en caliente.
+		- **Semantic Versioning** ➔ MAJOR.MINOR.PATCH ➔ cambios rotos / nuevos / fixes.
+		- **Copilot / DuckDuckGo** ➔ asistentes de código y búsqueda.
+		- **RFC / RCC** ➔ definiciones de estándares y protocolos técnicos.
+		- **Fork** ➔ copia personal de un repositorio remoto.
+		- **Mono-repo** ➔ estructura con múltiples apps en un mismo repo.

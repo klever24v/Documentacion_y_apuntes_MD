@@ -1,0 +1,51 @@
+- Que es la inteligencia
+	- capacidad de resolver problemas, conocimiento, comprensión, acto de aprender
+- Que es la inteligencia artificial
+	- Se define a nivel genérico en la rama de informática la capacidad de realizar tareas que requiere de la intervención humana
+	- Tecnología inspirada en redes neuronales (Red de nodos digitales)
+	- Los nodos trasmiten y comparten información entre ellas.
+- Machín Lear Ning
+	- espacio latente
+		- es como una representación oculta de los datos que las redes neuronales pueden aprender
+		- es capas de discernir conceptos básicos , el espacio latente también se le conoce como caja negra
+- IAs generativas mas utilizadas
+	- chatgpt --> texto
+	- Midjourney --> imagen
+	- Stable Diffution --> Imagen y video
+	- Leonardo  --> Imagen
+	- Runway Gen-1 y Gen-2 --> video
+	- pika Labs --> video
+	- ElevenLabs --> Audio
+- Que es un prompt
+	- Se refiere a la entrada de u texto que se le proporciona al modelo para generar una respuesta o realizar una tarea especifica. EL prompt actúa como una instrucción o estimulo que guía la respuesta del modelo . En términos mas detallados:
+		- Instrucción o Pregunta: Un prompt puede ser una pregunta o una solicitud de información. por ejemplo "¿Cual es la capital de Francia?" o " Explica la teoría de la relatividad"
+	- Diseño y formulación de un prompt
+		- Un buen prompt debe ser claro, especifico y estar formulado de manera que guíe al modelo hacia el tipo de respuesta o resultado deseado
+		-
+- ChatGPT
+	- IA de lenguaje escrito y multimodal
+	- Permite comprender y detectar texto en lenguaje natural
+	-
+- Bibliotecas  (usa)
+	- basicos
+		- jupiter --> compartir código para correr código IA usando Python
+		- pandas -->  análisis y procesamiento de datos usando Python (explorar datos)  métodos para leer los datos tiras o gigas (extrapolar información)
+		- matplotlib --> crear graficos y visualizaciones usando Python
+		- numpy --> analizar los datos  (bucar)
+		- gradio --> ver la libreria
+	- mas complejos especializados en el aprendizaje automático
+		- scikit learn --> biblioteca con algoritmo y herramienta de preprocesamientos de datos  entre otro (procesamiento de datos igual que panda solo que tiene mas funciones ) ayuda a ver qeu columnas de datos hayq eu ver ==nota==
+		- pytorch  --> desarrollada por facebook para analisisde datos
+		- tensorflow --> desarollado por Google Branch,  flexible, escalable y con aprendizaje para el entrenamiento de modelos
+		- Siguiente nivel de  de niveles neuronales
+	- Machine Lear Ning  --> aprendizaje automático UNA O DOS CAPAS
+		- Deep Lear Ning  --> aprendizaje profundo (especialización) MAS CAPAS
+		  collapsed:: true
+			- modelo discvriminativos
+			- modelos generativos
+			- llms --> grandes modelos de lenguaje
+		- modelos supervisados (TECNICAS ) scoring (puntuar) (le decimos si se equivoca )
+			- utilizan datos etiquetados (por categorías)
+		- modelos no supervisados (TECNICAS ) (esperamos la respuesta y si falla modificamos los datos para volverlo a entrenar )
+			- datos no etiquetados ver los datos  e intentar categorizarlos
+-
